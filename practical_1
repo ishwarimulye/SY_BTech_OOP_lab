@@ -1,0 +1,111 @@
+ASSIGNMENT 1: Operations on bank account*/
+#include<iostream>
+using namespace std;
+class bank_account
+{
+    // Data members 
+    string name;       // Customer name
+    string acc_type;   // Account type 
+    int acc_no;        // Account number
+    float balance = 0; // Initial balance 
+
+public:
+    // Parameterized constructor
+    bank_account(string n, string acc, int no, int bal);
+
+    // Member functions
+    void display();   // Show account details
+    void deposit();   // Deposit money
+    void withdraw();  // Withdraw money
+};
+
+// Constructor definition (used to initialize object)
+bank_account::bank_account(string n, string acct, int ano, int bal) {
+    name = n;
+    acc_type = acct;
+    acc_no = ano;
+    balance = bal;
+}
+
+// Function to display account details
+void bank_account::display() {
+    cout << "\n--- Account Details ---\n";
+    cout << "Customer name : " << name << endl;
+    cout << "Account type  : " << acc_type << endl;
+    cout << "Account number: " << acc_no << endl;
+    cout << "Balance       : " << balance << endl;
+}
+
+// Function to deposit money
+void bank_account::deposit() {
+    float dp;
+    cout << "Enter amount to be deposited: ";
+    cin >> dp;
+    balance += dp; // increase balance
+    cout << "New balance is: " << balance << endl;
+}
+
+// Function to withdraw money
+void bank_account::withdraw() {
+    float wd;
+    cout << "Enter amount to withdraw: ";
+    cin >> wd;
+
+    // Check if withdrawal is possible
+    if (wd > balance) {
+        cout << "Insufficient balance! Transaction failed.\n";
+    } else {
+        balance -= wd; // decrease balance
+        cout << "New balance is: " << balance << endl;
+    }
+}
+
+int main() {
+    string nm, atype;
+    int accno, balance;
+
+    // Take customer details
+    cout << "Welcome! Please enter the following details: \n\n";
+    cout << "Enter name of customer: ";
+    cin >> nm;
+    cout << "Enter account type: ";
+    cin >> atype;
+    cout << "Enter account number: ";
+    cin >> accno;
+    cout << "Enter current balance: ";
+    cin >> balance;
+
+    // Create bank account object
+    bank_account obj(nm, atype, accno, balance);
+
+    int choice;
+    char ch1;
+
+    // Menu-driven loop
+    do {
+        cout << "\n\n--- Please select your option ---";
+        cout << "\n1. Deposit";
+        cout << "\n2. Withdraw";
+        cout << "\n3. Display";
+        cout << "\n4. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1: obj.deposit(); 
+			break;
+            case 2: obj.withdraw(); 
+			break;
+            case 3: obj.display(); 
+			break;
+            case 4: cout << "Thank you!! Exiting....\n"; 
+			break;
+            default: cout << "Invalid choice! Try again.\n";
+        }
+        cout << "Do you want to continue (Y/N)? ";
+            cin >> ch1;
+
+    } while (ch1 == 'Y' || ch1 == 'y');
+
+    return 0;
+}
