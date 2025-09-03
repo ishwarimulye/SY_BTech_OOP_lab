@@ -1,0 +1,125 @@
+ASSIGNMENT 2: Employee Information System*/
+
+#include<iostream>
+using namespace std;
+class employee {
+    string name;
+    int emp_id=0;
+    string department;
+    string date;       // date stored as string
+    int contact=0;
+    string address;
+    static int count;
+    
+public:
+    employee(employee &j);          // Copy constructor
+    employee();                     // Default constructor
+    employee(string n,int id,string dep,string date,int cnt,string add); // Parameterized constructor
+    void display();
+    
+    //inline function
+    inline void title(){   
+        cout<<"Welcome!"<<endl;
+    }
+
+    static void showcount(void){
+        cout<<"count: "<<count<<endl;
+    }
+    
+    //destructor
+    ~employee(){
+        cout<<"\nthis is Destructor : "<<count<<endl;
+        count--;
+    }
+};
+
+// Default constructor
+employee::employee(){
+    cout<<"\n\nThis is default constructor"<<endl;
+    name="rahul";
+    emp_id=1234;
+    department="IT";
+    date="2/8/25";   
+    contact=12345677;
+    address="Mumbai";
+    count++;
+}
+
+// Parameterized constructor
+employee::employee(string n,int id,string dep, string dt,int cnt,string add){
+    cout<<"\n\nThis is parameterised constructor"<<endl;
+    name=n;
+    emp_id=id;
+    department=dep;
+    date=dt;
+    contact=cnt;
+    address=add;
+    count++;
+}
+
+// Copy constructor
+employee::employee(employee &j){
+    cout<<"\n\nThis is copy constructor"<<endl;
+    name=j.name;
+    emp_id=j.emp_id;
+    department=j.department;
+    date=j.date;
+    contact=j.contact;
+    address=j.address;
+    count++;
+}
+
+void employee::display(){
+    cout<<"Name of employee: "<<name<<endl;
+    cout<<"Employee id: "<<emp_id<<endl;
+    cout<<"Department: "<<department<<endl;
+    cout<<"Date of joining: "<<date<<endl;   
+    cout<<"Contact: "<<contact<<endl;
+    cout<<"Address: "<<address<<endl;
+}
+
+int employee::count=0;
+
+
+int main() {
+    string nm,ad,dp,da;
+    int eid,ct;
+	cout<<"Enter name: ";
+    getline(cin,nm);
+	cout<<"Enter employee id: ";
+    cin>>eid;
+	cout<<"Enter department: ";
+    cin>>dp;
+	cout<<"Enter date of joining (format dd/mm/yy): ";
+    cin>>da;
+    cout<<"Enter contact number: ";
+    cin>>ct;
+    cout<<"Enter address: ";
+	cin>>ad;
+
+    // First three objects without new/delete
+    employee emp1(nm,eid,dp,da,ct,ad);       // parameterized constructor
+    emp1.title();
+    emp1.display();
+    employee::showcount();
+
+    employee emp2;                           // default constructor
+    emp2.title();
+	emp2.display();
+    employee::showcount();
+
+    employee emp3(emp2);                     // copy constructor
+    emp3.title();
+	emp3.display();
+    employee::showcount();
+
+   
+    employee *emp4 = new employee("Amit", 2005, "Finance", "09/08/25", 987654321, "Pune");
+    emp4->title();
+    emp4->display();
+    employee::showcount();
+
+    delete emp4; 
+
+    return 0;
+}
