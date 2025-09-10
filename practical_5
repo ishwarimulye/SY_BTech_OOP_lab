@@ -1,0 +1,41 @@
+Assignment 5: Geometrical Shapes Area calculator*/
+#include<iostream>
+using namespace std;
+class shape{
+protected:
+	int x,y;
+public:
+	void getdata();
+	virtual void display_area()=0;
+};
+void shape::getdata(){
+	cout<<"Enter length: ";
+	cin>>x;
+	cout<<"Enter breadth: ";
+	cin>>y;
+}
+class triangle:public shape{
+	void display_area(){
+		float area=0.5*x*y;
+		cout<<"Area of triangle: "<<area<<endl;
+	}
+};
+class rectangle: public shape{
+	void display_area(){
+		float area=x*y;
+		cout<<"Area of rectangle: "<<area<<endl;
+	}
+};
+int main(){
+	shape *ptr;
+	triangle t;
+	ptr=&t;
+	ptr->getdata();
+	ptr->display_area();
+	rectangle r;
+	ptr=&r;
+	ptr->getdata();
+	ptr->display_area();
+	return 0;
+}
+
