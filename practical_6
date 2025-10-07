@@ -1,0 +1,40 @@
+/*ASSIGNMENT 6: Exception handling*/
+#include<iostream>
+using namespace std;
+class compute{
+	double num,den;
+public:
+	void accept();
+	void division();
+};
+void compute::accept(){
+
+	cout<<"Enter numerator: ";
+	cin>>num;
+    cout<<"Enter denominator: ";
+	cin>>den;
+}
+void compute::division(){
+	try{
+		if(den==0){
+			throw(den);  
+		}
+		else{
+			cout<<"the division is: "<<num/den<<endl;
+		}
+	}
+		catch(double){
+				cout<<"Invalid! denominator cannot be zero"<<endl;
+			}
+
+}
+int main(){
+	compute c1;
+	c1.accept();
+	c1.division();
+
+	return 0;
+
+
+}
+
